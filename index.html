@@ -3,14 +3,77 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Homepage</title>
+    <title>ninoio</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Sen:wght@400..800&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/d458de1ab4.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <div>
-        <h1>Hey!</h1>
-        <h2>Sorry, but this Website is currently in development. It will be online again around the 1st May.</h2>
-        <h2>You can watch this Video until then: <a href="https://www.youtube.com/watch?v=GqBnTQiJH1A">www.youtube.com/watch?v=GqBnTQiJH1A</a></h2>
-    </div>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">ninoio</div>
+            <ul class="nav-links">
+                <li><a href="/index.html">Home</a></li>
+                <li><a href="/about.html">About Me</a></li>
+                <li><a href="/projects.html">Projects</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <header class="hero">
+        <div class="hero-content">
+            <h2 class="wattsigma-title">nino.css</h2>
+            <p class="tagline">The developer who will never complete a project.</p>
+        </div>
+        <div class="hero-image">
+            <img src="/3wmY.gif" alt="nino duh ~">
+            </div>
+    </header>
+
+    <main>
+        <section class="features">
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-school"></i>
+                </div>
+                <h3>Currently in School</h3>
+                <p>So don't expect replies, finished work or time to code stuff.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fa-brands fa-github"></i>
+                </div>
+                <a href="https://github.com/nino749/">
+                    <h3>Github</h3>
+                </a>
+                <p>Check my Github to see if I'm coding or not, probably not...</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fa-solid fa-glasses"></i>
+                </div>
+                <h3>At a Glance</h3>
+                <ul class="one-sight">
+                    <li><label><input type="checkbox" checked disabled> In school</label></li>
+                    <li><label><input type="checkbox" checked disabled> No time</label></li>
+                    <li><label><input type="checkbox" checked disabled> My code is ugly</label></li>
+                    <li><label><input type="checkbox" checked disabled> Web-Dev and some Python</label></li>
+                    <li><label><input type="checkbox" checked disabled> I hate Python</label></li>
+                </ul>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">
+                    <i class="fa-brands fa-discord"></i>
+                </div>
+            <h3>Discord</h3>
+            <p>You can DM me on Discord <span style="color: rgb(93, 157, 240);">(nino.css)</span>, but I don't know, if I would reply to you.</p>
+        </section>
+    </main>
+    <footer>
+        <p>&copy nino 2025. All rights reserved.</p>
+    </footer>
+    <script src="script.js"></script>
 </body>
 </html>
