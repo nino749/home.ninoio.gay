@@ -1,11 +1,11 @@
-.logo, .wattsigma-title{
+.logo, .wattsigma-title, .feature-card h3, .feature-card-1 h3{
     background-image: radial-gradient(
     circle, 
     rgb(109, 109, 255),
-    rgb(144, 238, 255),
-    rgb(247, 0, 255),
-    rgb(31, 101, 207),
-    rgb(110, 110, 250)
+    rgb(255, 255, 255),
+    rgb(255, 0, 255),
+    rgb(255, 255, 255),
+    rgb(109, 109, 255)
     );
     background-size: 300% 300%;
     -webkit-background-clip: text;
@@ -386,7 +386,6 @@
     .wattsigma-title {
         font-size: 4em;
         font-weight: bold;
-        color: #e0e0e0;
         margin-bottom: 20px;
     }
 
