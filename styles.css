@@ -20,7 +20,7 @@
   }
   .wattsigma-title-div {
     display: flex;
-    justify-content: left; /* Oder eine andere Ausrichtung für den Titel */
+    justify-content: left;
 }
 .wattsigma-title-1{
     overflow: hidden;
@@ -28,10 +28,9 @@
     border-right: 1px solid white;
     animation: typing 3s steps(22) forwards,
     blink 1s step-end infinite;
-    /*width: 6.5ch;*/
 }
 .tagline {
-    margin-top: 1rem; /* Beispiel für Abstand zum Titel */
+    margin-top: 1rem;
 }
 
 @keyframes typing {
