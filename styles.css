@@ -146,7 +146,7 @@
         margin-bottom: 20px;
     }
 
-    .feature-card, .feature-card-1{
+    .feature-card, .feature-card-1 {
         background-color: #00000044;
         border-color: #5353535d;
         border-style: solid;
@@ -154,9 +154,10 @@
         padding: 20px;
         border-radius: 10px;
         transition: transform 0.3s ease-in-out;
+        height: 200px;
     }
 
-    .feature-card h3, .feature-card-1 h3{
+    .feature-card h3, .feature-card-1 h3 {
         display: flex;
         align-items: center;
         gap: 10px;
@@ -164,7 +165,7 @@
         color: #e0e0e0;
     }
 
-    .feature-card-1:hover, .feature-card:hover{
+    .feature-card-1:hover, .feature-card:hover {
         transform: translateY(-5px) scale(1.01);
         cursor: pointer;
     }
