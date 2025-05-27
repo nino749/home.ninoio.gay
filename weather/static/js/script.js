@@ -24,7 +24,6 @@ function loadPins() {
         pinSection.classList.add("show");
         editBtn.classList.add("show");
     }, 50);
-
     pins.forEach((city, index) => {
         const cityButton = document.createElement("div");
         cityButton.className = "pin-button-style";
@@ -35,8 +34,6 @@ function loadPins() {
         cityButton.onclick = () => {
             if (isEditingPins) {
                 removePin(city);
-            } else {
-                window.location.href = `/?city_input=${encodeURIComponent(city)}`;
             }
         };
 
@@ -50,24 +47,20 @@ function addPin(city) {
         pins.push(city);
         localStorage.setItem("pinnedCities", JSON.stringify(pins));
         loadPins();
-        return true;
     }
-    return false;
 }
 
 function removePin(city) {
     let pins = JSON.parse(localStorage.getItem("pinnedCities") || "[]");
-    const originalLength = pins.length;
     pins = pins.filter(c => c !== city);
     localStorage.setItem("pinnedCities", JSON.stringify(pins));
     loadPins();
-    return pins.length < originalLength;
 }
+
 
 function toggleEditMode() {
     isEditingPins = !isEditingPins;
     editBtn.innerHTML = isEditingPins ? "✔" : "🗑️";
-    
     if (isEditingPins) {
         editBtn.style.backgroundColor = "rgba(245, 94, 94, 0.3)";
         editBtn.style.borderColor = "rgba(245, 94, 94, 0.8)";
@@ -84,6 +77,7 @@ window.addEventListener("DOMContentLoaded", () => {
     if (currentCity) {
         const pinBtn = document.createElement("button");
         pinBtn.className = "pin-button";
+        pinBtn.dataset.city = currentCity;
         
         const pins = JSON.parse(localStorage.getItem("pinnedCities") || "[]");
         const isAlreadyPinned = pins.includes(currentCity);
@@ -98,23 +92,18 @@ window.addEventListener("DOMContentLoaded", () => {
         pinBtn.onclick = () => {
             if (isAlreadyPinned) {
                 removePin(currentCity);
-                pinBtn.textContent = "";
-                pinBtn.classList.remove("pinned");
-                
                 pinBtn.style.transform = "translateY(0) scale(0.9)";
                 setTimeout(() => {
                     pinBtn.style.transform = "";
                 }, 150);
             } else {
                 addPin(currentCity);
-                pinBtn.textContent = "";
-                pinBtn.classList.add("pinned");
-                
                 pinBtn.style.transform = "translateY(-2px) scale(1.1)";
                 setTimeout(() => {
                     pinBtn.style.transform = "";
                 }, 200);
             }
+            isAlreadyPinned = !isAlreadyPinned; 
         };
         document.querySelector(".weather-app").appendChild(pinBtn);
     }
@@ -181,8 +170,6 @@ function activateWaterWaves() {
 function deactivateWaterWaves() {
     waterContainer.classList.remove('active-waves');
 }
-
-
 
 function animateWaterLevel() {
     const waterLevel = document.getElementById('water-level');
