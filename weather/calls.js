@@ -43,7 +43,7 @@ function getWindDirection(degree) {
 
 // Geocoding function
 async function geocodeCity(cityName) {
-    const url = `http://localhost:3000/api/geocode?name=${encodeURIComponent(cityName)}&count=1&language=en&format=json`;
+    const url = `https://geocoding-api.open-meteo.com/v1/search?name=${encodeURIComponent(cityName)}&count=1&language=en&format=json`;
     
     console.log("URL geocoding: ", url);
     const response = await fetch(url);
@@ -67,7 +67,7 @@ async function getWeatherForecast(lat, lon) {
         'temperature_2m', 'relative_humidity_2m', 'precipitation', 'weathercode',
         'wind_direction_80m', 'apparent_temperature'
     ].join(',');
-    const url = `http://localhost:3000/api/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=${dailyParams}&hourly=${hourlyParams}&timezone=auto`;    //const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=${dailyParams}&hourly=${hourlyParams}&timezone=auto`;
+    const url = `https://api.open-meteo.com/v1/forecast?latitude=${lat}&longitude=${lon}&current_weather=true&daily=${dailyParams}&hourly=${hourlyParams}&timezone=auto`;
     console.log("[getWeatherForecast] Attempting to fetch URL:", url);
     try {
         const response = await fetch(url);
