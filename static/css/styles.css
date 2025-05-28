@@ -55,7 +55,7 @@
         margin: 0;
         background-color: #181818;
         color: #f0f0f0;
-        background-image: url(/img.png);
+        background-image: url(/static/images/img.png);
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
@@ -283,7 +283,7 @@
         margin: 0;
         background-color: #181818;
         color: #f0f0f0;
-        background-image: url(/img.png);
+        background-image: url(/static/images/img.png);
         background-repeat: no-repeat;
         background-attachment: fixed;
         background-position: center;
