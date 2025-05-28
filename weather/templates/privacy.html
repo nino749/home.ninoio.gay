@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Don't look up</title>
+    <link rel="stylesheet" href="/static/css/privacy-styles.css">
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <div class="overlay" id="overlay" onclick="toggleMenu()"></div>
+
+    <div class="dropdown-container">
+        <button class="menu-button" onclick="toggleDropdown()">☰</button>
+        <div class="dropdown-menu" id="dropdown-menu">
+            <a href="https://ninoio.gay/">🏠 Homepage</a>
+            <a href="https://github.com/nino749">🐈‍⬛ Github</a>
+            <a href="/templates/privacy">🕵️ Privacy</a>
+            <a href="/main.html">☁️ Weather</a>
+        </div>
+    </div>
+
+    <div class="container">
+        <h1>Privacy Policy</h1>
+
+        <p>The terms used are not gender-specific.</p>
+        <p><strong>Last updated:</strong> May 26, 2025</p>
+
+        <h2>Table of Contents</h2>
+        <ul class="index">
+        <li><a class="index-link" href="#m3">Controller</a></li>
+        <li><a class="index-link" href="#mOverview">Overview of Data Processing</a></li>
+        <li><a class="index-link" href="#m2427">Relevant Legal Bases</a></li>
+        <li><a class="index-link" href="#m225">Provision of the Online Offer and Web Hosting</a></li>
+        </ul>
+
+        <h2 id="m3">Controller</h2>
+        <p>nino<br>
+        Contact via Discord: nino.css<br>
+        Email: <a href="mailto:help@ninoio.gay">help@ninoio.gay</a>
+        </p>
+
+        <h2 id="mOverview">Overview of Data Processing</h2>
+        <h3>Types of Data Processed</h3>
+        <ul>
+        <li>Usage data</li>
+        <li>Meta, communication and procedural data</li>
+        <li>Log data</li>
+        </ul>
+
+        <h3>Categories of Data Subjects</h3>
+        <ul>
+        <li>Users</li>
+        </ul>
+
+        <h3>Purposes of Processing</h3>
+        <ul>
+        <li>Provision of my online offering and user-friendliness</li>
+        <li>IT infrastructure</li>
+        </ul>
+
+        <h2 id="m2427">Relevant Legal Bases</h2>
+        <p><strong>According to the GDPR:</strong></p>
+        <ul>
+        <li><strong>Legitimate Interests (Art. 6(1)(f) GDPR):</strong>
+            Processing is necessary for the purposes of the legitimate interests pursued by the controller or a third party,
+            provided these are not overridden by the interests or fundamental rights and freedoms of the data subject.
+        </li>
+        </ul>
+
+        <h2 id="m225">Provision of the Online Offer and Web Hosting</h2>
+        <p>I process users data in order to provide our online services. This includes processing the IP address for
+        technical delivery of content.</p>
+
+        <ul>
+        <li><strong>Types of data processed:</strong> Usage data, meta, communication and procedural data, log data</li>
+        <li><strong>Data subjects:</strong> Users (e.g. website visitors)</li>
+        <li><strong>Purposes:</strong> Operation of the online offer, IT infrastructure</li>
+        <li><strong>Retention and deletion:</strong> According to the section "General information on data retention and deletion"</li>
+        <li><strong>Legal basis:</strong> Legitimate interests (Art. 6(1)(f) GDPR)</li>
+        </ul>
+
+        <h3>Additional Information:</h3>
+        <ul>
+        <li><strong>Hosting by third-party providers:</strong> My service is hosted on Github;
+            <strong>Legal basis:</strong> Legitimate interests (Art. 6(1)(f) GDPR)
+        </li>
+        </ul>
+
+        <p>Addresses and contact details may change. Please verify the accuracy of the information before getting in touch.</p>
+        
+        <small>&copy; nino.css | ninoio.gay</small>
+    </div>
+
+<script>
+    function toggleDropdown() {
+        const menu = document.getElementById('dropdown-menu');
+        menu.classList.toggle('show');
+    }
+
+    window.addEventListener('click', function(e) {
+        const menu = document.getElementById('dropdown-menu');
+        const button = document.querySelector('.menu-button');
+        if (!menu.contains(e.target) && !button.contains(e.target)) {
+            menu.classList.remove('show');
+        }
+    });
+</script>
+</body>
+</html>

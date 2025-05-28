@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Don't look up</title>
+    <meta name="description" content="A clean weather site">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="/static/images/favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="static/css/styles.css">
+</head>
+<body>
+    <div class="dropdown-container">
+        <button class="menu-button" onclick="toggleDropdown()">☰</button>
+        <div class="dropdown-menu" id="dropdown-menu">
+            <a href="https://ninoio.gay/">🏠 Homepage</a>
+            <a href="https://github.com/nino749">🐈‍⬛ Github</a>
+            <a href="/templates/privacy.html">🕵️ Privacy</a>
+            <a href="/main.html">☁️ Weather</a>
+        </div>
+    </div>
+
+    <div class="default-background"></div>
+
+    <div class="background-scene" id="sunny-background">
+        <div class="sun"></div>
+        
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+        
+        <div class="trees">
+            <div class="tree tree1">
+                <div class="tree-leaves"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree tree2">
+                <div class="tree-leaves"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree tree3">
+                <div class="tree-leaves"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree tree4">
+                <div class="tree-leaves"></div>
+                <div class="tree-trunk"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="rain-background" id="rain-background">
+        <div class="rain-cloud rain-cloud1"></div>
+        <div class="rain-cloud rain-cloud2"></div>
+        <div class="rain-cloud rain-cloud3"></div>
+        
+        <div class="rain" id="rain-effect"></div>
+    </div>
+
+    <div class="fog-background" id="fog-background">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+        
+        <div class="trees">
+            <div class="tree tree1">
+                <div class="tree-leaves"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree tree2">
+                <div class="tree-leaves"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree tree3">
+                <div class="tree-leaves"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree tree4">
+                <div class="tree-leaves"></div>
+                <div class="tree-trunk"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="snow-background" id="snow-background">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+
+        <div class="trees">
+            <div class="tree tree1">
+                <div class="tree-leaves"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree tree2">
+                <div class="tree-leaves"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree tree3">
+                <div class="tree-leaves"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree tree4">
+                <div class="tree-leaves"></div>
+                <div class="tree-trunk"></div>
+            </div>
+        </div>
+
+        <div class="snowflake" style="left: 20%; animation-delay: 0s;"></div>
+        <div class="snowflake" style="left: 40%; animation-delay: 1s;"></div>
+        <div class="snowflake" style="left: 60%; animation-delay: 2s;"></div>
+        <div class="snowflake" style="left: 80%; animation-delay: 3s;"></div>
+    </div>
+
+    <div class="freezing-background" id="freezing-background">
+        <div class="rain-cloud rain-cloud1"></div>
+        <div class="rain-cloud rain-cloud2"></div>
+        <div class="rain-cloud rain-cloud3"></div>
+        
+        <div class="rain" id="freezing-rain-effect"></div>
+    </div>
+
+    <div class="rain-background thunderstorm-background" id="thunderstorm-background">
+        <div class="rain-cloud rain-cloud1"></div>
+        <div class="rain-cloud rain-cloud2"></div>
+        <div class="rain-cloud rain-cloud3"></div>
+
+        <div class="rain" id="storm-rain-effect"></div>
+        <div class="lightning" id="lightning-flash"></div>
+    </div>
+
+    <div class="cloudy-background" id="cloudy-background">
+        <div class="cloud cloud1"></div>
+        <div class="cloud cloud2"></div>
+        <div class="cloud cloud3"></div>
+        <div class="cloud cloud4"></div>
+        <div class="cloud cloud5"></div>
+        <div class="cloud cloud6"></div>
+
+        
+        <div class="trees">
+            <div class="tree tree1">
+                <div class="tree-leaves"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree tree2">
+                <div class="tree-leaves"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree tree3">
+                <div class="tree-leaves"></div>
+                <div class="tree-trunk"></div>
+            </div>
+            <div class="tree tree4">
+                <div class="tree-leaves"></div>
+                <div class="tree-trunk"></div>
+            </div>
+        </div>
+    </div>
+    
+    <div class="lightning" id="lightning"></div>
+
+    <div class="water-container" id="water-container">
+        <svg class="water-wave" viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <path fill="url(#waterGradient)" fill-opacity="1" d="M0,160 C75,100 150,220 225,160 C300,100 375,220 450,160 C525,100 600,220 675,160 C750,100 825,220 900,160 C975,100 1050,220 1125,160 C1200,100 1275,220 1350,160 C1425,100 1500,220 1575,160 C1650,100 1725,220 1800,160 C1875,100 1950,220 2025,160 C2100,100 2175,220 2160,160 L2160,320 L0,320 Z"></path>
+        </svg>
+        <svg class="water-wave back-wave" viewBox="0 0 1440 320" preserveAspectRatio="none">
+            <path fill="url(#waterGradient)" fill-opacity="0.8" d="M0,192 C160,96 320,288 480,192 C640,96 800,288 960,192 C1120,96 1280,288 1440,192 L1440,320 L0,320 Z"></path>
+        </svg>
+
+        <svg width="0" height="0">
+            <defs>
+                <linearGradient id="waterGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:rgba(100, 190, 240, 1);" />
+                    <stop offset="50%" style="stop-color:rgba(80, 160, 230, 1);" />
+                    <stop offset="100%" style="stop-color:rgba(60, 130, 210, 1);" />
+                </linearGradient>
+                <linearGradient id="waterGradientBack" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" style="stop-color:rgba(80, 160, 230, 0.8);" />
+                    <stop offset="50%" style="stop-color:rgba(60, 130, 210, 0.8);" />
+                    <stop offset="100%" style="stop-color:rgba(40, 100, 190, 0.8);" />
+                </linearGradient>
+            </defs>
+        </svg>
+
+        <svg class="rubber-duck duck1" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="50" cy="65" rx="30" ry="20" fill="#fcd116" />
+            <path d="M35,65 Q25,55 35,50 Q45,52 40,65" fill="#eebf00"/>
+            
+            <circle cx="65" cy="40" r="15" fill="#fcd116" />
+            
+            <circle cx="70" cy="35" r="3.5" fill="#ffffff"/>
+            <circle cx="70" cy="35" r="1.5" fill="#000000"/>
+            <circle cx="71" cy="34" r="0.7" fill="#ffffff"/>
+            
+            <path d="M78,42 Q82,44 78,46 Q75,44 78,42" fill="#e67300" />
+            <path d="M78,46 Q80,48 77,48 Q74,47 78,46" fill="#cc5c00" />
+        </svg>
+
+        <svg class="rubber-duck duck2" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="50" cy="65" rx="30" ry="20" fill="#fcd116" />
+            <path d="M35,65 Q25,55 35,50 Q45,52 40,65" fill="#eebf00"/>
+
+            <path d="M58,27 Q65,22 72,27 Q65,25 58,27 Z" fill="#ffffff" stroke="#000" stroke-width="0.5"/>
+            <line x1="60" y1="26" x2="70" y2="26" stroke="#3366cc" stroke-width="1" />
+
+            <circle cx="65" cy="40" r="15" fill="#fcd116" />
+            
+            <circle cx="70" cy="35" r="3.5" fill="#ffffff"/>
+            <circle cx="70" cy="35" r="1.5" fill="#000000"/>
+            <circle cx="71" cy="34" r="0.7" fill="#ffffff"/>
+            
+            <path d="M78,42 Q82,44 78,46 Q75,44 78,42" fill="#e67300" />
+            <path d="M78,46 Q80,48 77,48 Q74,47 78,46" fill="#cc5c00" />
+        </svg>
+
+        <svg class="rubber-duck duck3" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <ellipse cx="50" cy="65" rx="30" ry="20" fill="#fcd116" />
+            <path d="M35,65 Q25,55 35,50 Q45,52 40,65" fill="#eebf00"/>
+        
+            <path d="M58,27 Q65,22 72,27 Q65,25 58,27 Z" fill="#ffffff" stroke="#000" stroke-width="0.5"/>
+            <line x1="60" y1="26" x2="70" y2="26" stroke="#3366cc" stroke-width="1" />
+
+            <circle cx="65" cy="40" r="15" fill="#fcd116" />
+            
+            <circle cx="70" cy="35" r="3.5" fill="#ffffff"/>
+            <circle cx="70" cy="35" r="1.5" fill="#000000"/>
+            <circle cx="71" cy="34" r="0.7" fill="#ffffff"/>
+            
+            <path d="M78,42 Q82,44 78,46 Q75,44 78,42" fill="#e67300" />
+            <path d="M78,46 Q80,48 77,48 Q74,47 78,46" fill="#cc5c00" />
+        </svg>    
+    </div>
+
+    <div class="screen-drops" id="screen-drops"></div>
+
+    <!-- Main Weather App -->
+    <form class="weather-app" id="weather-app">
+        <div id="error-container"></div>
+
+        <h1 class="app-heading" id="app-heading">Don't look up</h1>
+        <p id="app-heading-country" class="app-heading-country"></p>
+
+        <div class="search-bar">
+            <input type="text" id="city-input" placeholder="Enter a city here...">
+            <button id="search-button" type="submit">🔍</button>
+        </div>
+
+        <div class="pinned-section" id="pinned-section">
+            <div id="error-container" style="display: none;"></div>
+
+            <div id="pin-list" class="pin-list-scroll show"></div>
+            
+            <div class="blur-overlay"></div>
+            <button id="edit-pins-button" type="button" class="edit-pins-btn">
+                🗑️
+            </button>
+        </div>
+
+        <div class="weather-display" id="weather-display">
+            <p class="desc" id="weather-desc"></p>
+            <div class="main-info">
+                <p class="temp">
+                    <span id="temp-value"></span>°C
+                </p>
+            </div>
+            <small class="small-desc">feels like <span id="feel-temp"></span>°C</small>
+            <br><br>
+            <small class="small-desc">low: <span id="min-temp"></span>°C • high: <span id="max-temp"></span>°C</small>
+            
+            <h3>Hourly Forecast</h3>
+            <div class="hourly-forecast" id="hourly-forecast">
+                <p>No hourly forecast available</p>
+            </div>
+
+            <h3>Weather Details</h3>
+            <div class="details">
+                <div class="detail-item">
+                    <p>Humidity</p>
+                    <p><span id="humidity"></span>%</p>
+                </div>
+                <div class="detail-item">
+                    <p>Risk of rain</p>
+                    <p><span id="rain-risk"></span>% <br>
+                    <span id="precipitation-hours"></span> hrs.<br>
+                </div>
+                <div class="detail-item">
+                    <p>Wind speed</p>
+                    <p><span id="wind-speed"></span> km/h</p>
+                </div>
+            </div>
+
+            <h3>Weekly Forecast</h3>
+            <div class="daily-forecast" id="daily-forecast"></div>
+
+            <small style="font-style: italic; color: rgba(255,255,255,0.7);">Source: Open Meteo API</small>
+        </div>
+    </form>
+    
+    <script src="/static/js/main-script.js"></script>
+</body>
+</html>
