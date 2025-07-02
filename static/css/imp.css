@@ -1,0 +1,43 @@
+:root {
+    --font-color: #f3f6fa;
+    --background-color: #181c24;
+    --card-background-color: rgba(38, 41, 49, 0.3);
+    --box-shadow-color: rgba(0, 0, 0, 0.35);
+    --input-border-color: #2d3444;
+    --button-background-color: #2196f3;
+    --button-hover-color: #1769aa;
+    --heading-color: #90caf9;
+    --detail-border-color: #263043;
+    --detail-label-color: #dae6ec;
+    --detail-value-color: #f0f0f0;
+    --accent: #ffb300;
+    --accent-2: #FFD700;
+}
+
+body {
+    font-family: "Segoe UI", "Roboto", Arial, sans-serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    overflow-x: hidden;
+    background-color: var(--background-color);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+footer {
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+}
+
+footer p {
+    color: rgba(255, 255, 255, 0.6);
+}

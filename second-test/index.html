@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test 2: IQ Test</title>
+    <link rel="stylesheet" href="../static/css/iq.css">
+</head>
+<body>
+    <div class="container">
+        <div class="start-screen" id="startScreen">
+            <h1 class="title">Test 2: IQ Test</h1>
+            <button class="start-btn" onclick="startTest()">Continue</button>
+        </div>
+
+        <div class="test-screen hidden" id="testScreen">
+            <div class="progress">
+                <div class="progress-bar" id="progressBar"></div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question" id="question"></div>
+                <div class="answers" id="answers"></div>
+            </div>
+        </div>
+
+        <div class="result hidden" id="result">
+            <div class="result-title" id="resultTitle"></div>
+            <div class="result-description" id="resultDescription"></div>
+            <button class="restart-btn" onclick="next()">Continue</button>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 ninoio. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function hasTaskCookie() {
+            return document.cookie.includes('taskCompletedTest1=true');
+        }
+
+        if (!hasTaskCookie()) {
+            window.location.href = '../first-test';
+        }
+
+        const questions = [
+            {
+                question: "Which viral meme is the sound 'Skibidi bop bop yes yes' associated with?",
+                answers: ["Doge", "Skibidi Toilet", "Grumpy Cat", "Nyan Cat"],
+                correct: 1
+            },
+            {
+                question: "What does POV mean?",
+                answers: ["Point of View", "Power Vengeance", "Personal Opinion", "Prioritized Option"],
+                correct: 0
+            },
+            {
+                question: "What does 'rizz' mean?",
+                answers: ["Confused", "Charisma, flirting ability", "Very angry", "Quick reaction"],
+                correct: 1
+            },
+            {
+                question: "What does 'simp' mean?",
+                answers: ["Very nice person", "A new game", "A music genre", "An internet browser"],
+                correct: 0
+            },
+            {
+                question: "What does the expression 'NPC' mean?",
+                answers: ["Normal person", "Unoriginal person", "New post", "Nice comment"],
+                correct: 1
+            },
+            {
+                question: "What is a 'Glow Up'?",
+                answers: ["Makeup trend", "Positive transformation", "Light effect", "Energy boost"],
+                correct: 1
+            },
+            {
+                question: "What does 'No cap' mean?",
+                answers: ["No hat", "No joke/for real", "No limit", "No cap"],
+                correct: 1
+            },
+            {
+                question: "What does it mean when something is 'sus'?",
+                answers: ["Is sweet", "Is suspicious", "Is sour", "Is super"],
+                correct: 1
+            },
+            {
+                question: "What is 'Brainrot'?",
+                answers: ["Brain disease", "Mindless content", "New video game", "Intensive studying"],
+                correct: 1
+            },
+            {
+                question: "When something is cringe, what does that mean?",
+                answers: ["Very funny", "Embarrassing, uncomfortable", "Very informative", "Very relaxing"],
+                correct: 1
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let userAnswers = [];
+
+        function startTest() {
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('testScreen').classList.remove('hidden');
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('question').textContent = question.question;
+            
+            const answersContainer = document.getElementById('answers');
+            answersContainer.innerHTML = '';
+            
+            question.answers.forEach((answer, index) => {
+                const button = document.createElement('button');
+                button.className = 'answer';
+                button.textContent = answer;
+                button.onclick = () => selectAnswer(index);
+                answersContainer.appendChild(button);
+            });
+            
+            updateProgress();
+        }
+
+        function selectAnswer(answerIndex) {
+            userAnswers.push(answerIndex);
+            
+            if (answerIndex === questions[currentQuestion].correct) {
+                score++;
+            }
+            
+            currentQuestion++;
+            
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                showResult();
+            }
+        }
+
+        function updateProgress() {
+            const progress = ((currentQuestion) / questions.length) * 100;
+            document.getElementById('progressBar').style.width = progress + '%';
+        }
+
+        function calculateBrainrotIQ() {
+            const baseIQ = 100;
+            const pointsPerCorrect = 15;
+            const percentage = (score / questions.length) * 100;
+            
+            let calculatedIQ = baseIQ + (score * pointsPerCorrect);
+            
+            if (percentage === 100) {
+                calculatedIQ += 50;
+            } else if (percentage >= 90) {
+                calculatedIQ += 30;
+            } else if (percentage >= 80) {
+                calculatedIQ += 20; 
+            } else if (percentage >= 70) {
+                calculatedIQ += 10;
+            }
+            
+            if (percentage < 30) {
+                calculatedIQ -= 30;
+            } else if (percentage < 50) {
+                calculatedIQ -= 15; 
+            }
+            
+            calculatedIQ = Math.max(10, Math.min(300, calculatedIQ));
+            
+            return Math.round(calculatedIQ);
+        }
+
+        function showResult() {
+            document.getElementById('testScreen').classList.add('hidden');
+            document.getElementById('result').classList.remove('hidden');
+            
+            const percentage = (score / questions.length) * 100;
+            const brainrotIQ = calculateBrainrotIQ();
+            let title, emoji, description;
+            
+            if (percentage >= 100) {
+                title = "Brainrotted! 🧠💀";
+                description = `Your IQ: ${brainrotIQ}`;
+            } else if (percentage >= 80) {
+                title = "Sigma! 💪";
+                description = `Your IQ: ${brainrotIQ}`;
+            } else if (percentage >= 60) {
+                title = "Normal 🥀";
+                description = `Your IQ: ${brainrotIQ}`;
+            } else if (percentage >= 30) {
+                title = "Intelligent? 🤔";
+                description = `Your IQ: ${brainrotIQ}`;
+            } else {
+                title = "Intelligent! 🤓";
+                description = `Your IQ: ${brainrotIQ}`;
+            }
+            
+            document.getElementById('resultTitle').textContent = title;
+            document.getElementById('resultDescription').textContent = description;
+        }
+        function next() {
+                document.cookie = "taskCompletedTest2=true; max-age=1200; path=/";
+
+                setTimeout(() => {
+                    window.location.href = '../third-test';
+                }, 200);
+        }
+    </script>
+</body>
+</html>

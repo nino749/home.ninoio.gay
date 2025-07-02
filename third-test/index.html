@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test 3: General Knowledge</title>
+    <link rel="stylesheet" href="../static/css/general.css">
+</head>
+<body>
+    <div class="quiz-container">
+        <div id="startScreen" class="start-screen">
+            <h1 class="quiz-title">Test 3</h1>
+            <button class="start-btn" onclick="startQuiz()">Continue</button>
+        </div>
+
+        <div id="quizScreen" class="hidden">
+            <div class="quiz-header">
+                <div class="progress-bar">
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+            </div>
+            
+            <div class="question-container">
+                <div class="question-number" id="questionNumber"></div>
+                <div class="question-text" id="questionText"></div>
+                <div class="answers-grid" id="answersGrid"></div>
+            </div>
+            
+            <button class="next-btn" id="nextBtn" onclick="nextQuestion()">Next</button>
+        </div>
+
+        <div id="resultScreen" class="result-screen hidden">
+            <h2 class="quiz-title">You are done!</h2>
+            <div class="score-display" id="finalScore"></div>
+            <div class="feedback" id="feedback"></div>
+            <button class="restart-btn" onclick="next()">gg, go next</button>
+        </div>
+    </div>
+    
+    <footer>
+        <p>&copy; 2025 ninoio. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function hasTaskCookie() {
+            return document.cookie.includes('taskCompletedTest2=true');
+        }
+
+        if (!hasTaskCookie()) {
+            window.location.href = '../first-test';
+        }
+
+        const questions = [
+            {
+                question: "Which is the longest river in the world?",
+                answers: ["Amazon", "Nile", "Mississippi", "Yangtze"],
+                correct: 1
+            },
+            {
+                question: "In which year did the Berlin Wall fall?",
+                answers: ["1987", "1989", "1991", "1993"],
+                correct: 1
+            },
+            {
+                question: "Which element has the chemical symbol 'Au'?",
+                answers: ["Silver", "Aluminum", "Gold", "Argon"],
+                correct: 2
+            },
+            {
+                question: "How many continents are there?",
+                answers: ["5", "6", "7", "8"],
+                correct: 2
+            },
+            {
+                question: "Who painted the Mona Lisa?",
+                answers: ["Michelangelo", "Leonardo da Vinci", "Raphael", "Donatello"],
+                correct: 1
+            },
+            {
+                question: "Which is the largest mammal in the world?",
+                answers: ["Elephant", "Blue whale", "Giraffe", "Rhinoceros"],
+                correct: 1
+            },
+            {
+                question: "In which country is Machu Picchu located?",
+                answers: ["Bolivia", "Ecuador", "Peru", "Chile"],
+                correct: 2
+            },
+            {
+                question: "How many hearts does an octopus have?",
+                answers: ["1", "2", "3", "4"],
+                correct: 2
+            },
+            {
+                question: "Which is the smallest planet in our solar system?",
+                answers: ["Mars", "Venus", "Mercury", "Pluto"],
+                correct: 2
+            },
+            {
+                question: "Who wrote 'Romeo and Juliet'?",
+                answers: ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"],
+                correct: 1
+            },
+            {
+                question: "Which gas makes up the largest portion of Earth's atmosphere?",
+                answers: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
+                correct: 2
+            },
+            {
+                question: "In which year was the Titanic built?",
+                answers: ["1909", "1911", "1912", "1910"],
+                correct: 1
+            },
+            {
+                question: "What is the capital of Australia?",
+                answers: ["Sydney", "Melbourne", "Canberra", "Perth"],
+                correct: 2
+            },
+            {
+                question: "How many teeth does an adult human normally have?",
+                answers: ["28", "30", "32", "34"],
+                correct: 2
+            },
+            {
+                question: "Which animal is the symbol of WWF?",
+                answers: ["Tiger", "Panda", "Elephant", "Polar bear"],
+                correct: 1
+            },
+            {
+                question: "In which year did Neil Armstrong land on the moon?",
+                answers: ["1967", "1968", "1969", "1970"],
+                correct: 2
+            },
+            {
+                question: "Which is the hardest natural material?",
+                answers: ["Quartz", "Diamond", "Sapphire", "Ruby"],
+                correct: 1
+            },
+            {
+                question: "How many sides does an octagon have?",
+                answers: ["6", "7", "8", "9"],
+                correct: 2
+            },
+            {
+                question: "Which country has the most time zones?",
+                answers: ["USA", "Russia", "China", "Canada"],
+                correct: 1
+            },
+            {
+                question: "Who composed 'The Four Seasons'?",
+                answers: ["Mozart", "Bach", "Vivaldi", "Beethoven"],
+                correct: 2
+            }
+        ];
+
+        let currentQuestion = 0;
+        let score = 0;
+        let selectedAnswer = null;
+
+        function startQuiz() {
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('quizScreen').classList.remove('hidden');
+            currentQuestion = 0;
+            score = 0;
+            showQuestion();
+        }
+
+        function showQuestion() {
+            const question = questions[currentQuestion];
+            document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
+            document.getElementById('questionText').textContent = question.question;
+            
+            const progress = ((currentQuestion) / questions.length) * 100;
+            document.getElementById('progressFill').style.width = progress + '%';
+
+            const answersGrid = document.getElementById('answersGrid');
+            answersGrid.innerHTML = '';
+
+            question.answers.forEach((answer, index) => {
+                const button = document.createElement('button');
+                button.className = 'answer-btn';
+                button.textContent = answer;
+                button.onclick = () => selectAnswer(index, button);
+                answersGrid.appendChild(button);
+            });
+
+            document.getElementById('nextBtn').style.display = 'none';
+            selectedAnswer = null;
+        }
+
+        function selectAnswer(answerIndex, button) {
+            if (selectedAnswer !== null) return;
+
+            selectedAnswer = answerIndex;
+            const question = questions[currentQuestion];
+            const buttons = document.querySelectorAll('.answer-btn');
+
+            buttons.forEach(btn => btn.disabled = true);
+
+            if (answerIndex === question.correct) {
+                button.classList.add('correct');
+                score++;
+            } else {
+                button.classList.add('incorrect');
+                buttons[question.correct].classList.add('correct');
+            }
+
+            setTimeout(() => {
+                document.getElementById('nextBtn').style.display = 'block';
+            }, 500);
+        }
+
+        function nextQuestion() {
+            currentQuestion++;
+            if (currentQuestion < questions.length) {
+                showQuestion();
+            } else {
+                showResults();
+            }
+        }
+
+        function showResults() {
+            document.getElementById('quizScreen').classList.add('hidden');
+            document.getElementById('resultScreen').classList.remove('hidden');
+            
+            const percentage = Math.round((score / questions.length) * 100);
+            document.getElementById('finalScore').textContent = `${score}/${questions.length} (${percentage}%)`;
+            
+            let feedback = '';
+            if (percentage >= 90) {
+                feedback = 'Nerd 🤓';
+            } else if (percentage >= 70) {
+                feedback = 'Nice job! 🥀';
+            } else if (percentage >= 50) {
+                feedback = 'Good boy! 🐶';
+            } else {
+                feedback = 'Not to say, but you might be stupid 💀';
+            }
+            
+            document.getElementById('feedback').textContent = feedback;
+        }
+
+        function next() {
+            document.cookie = "final=true; max-age=5000; path=/";
+
+            setTimeout(() => {
+                window.location.href = '../home/';
+            }, 100);
+        }
+    </script>
+</body>
+</html>
