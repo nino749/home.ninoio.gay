@@ -119,6 +119,7 @@
 
         function handleLogout() {
             document.cookie = "final=false; max-age=0; path=/";
+            document.cookie = "skip=false; max-age=31536000; path=/";
             window.location.href = '/';
         }
 
