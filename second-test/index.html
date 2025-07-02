@@ -35,6 +35,30 @@
         <p>&copy; 2025 ninoio. All rights reserved.</p>
     </footer>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDXX34b3o48hXWiQHjsvWuGgJzRIcLEzPg",
+            authDomain: "home-api-v1.firebaseapp.com",
+            projectId: "home-api-v1",
+            storageBucket: "home-api-v1.firebasestorage.app",
+            messagingSenderId: "621423913317",
+            appId: "1:621423913317:web:2b08cb2ad083fccb7b598c",
+            measurementId: "G-W3K4P1996N"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const snapshot = await getDocs(collection(db, "questions"));
+        const questions = snapshot.docs.map(doc => doc.data());
+
+        window.questions = questions;
+        window.questionsLoaded = true;
+    </script>
+
     <script>
         function hasTaskCookie() {
             return document.cookie.includes('taskCompletedTest1=true');
@@ -43,59 +67,6 @@
         if (!hasTaskCookie()) {
             window.location.href = '../first-test';
         }
-
-        const questions = [
-            {
-                question: "Which viral meme is the sound 'Skibidi bop bop yes yes' associated with?",
-                answers: ["Doge", "Skibidi Toilet", "Grumpy Cat", "Nyan Cat"],
-                correct: 1
-            },
-            {
-                question: "What does POV mean?",
-                answers: ["Point of View", "Power Vengeance", "Personal Opinion", "Prioritized Option"],
-                correct: 0
-            },
-            {
-                question: "What does 'rizz' mean?",
-                answers: ["Confused", "Charisma, flirting ability", "Very angry", "Quick reaction"],
-                correct: 1
-            },
-            {
-                question: "What does 'simp' mean?",
-                answers: ["Very nice person", "A new game", "A music genre", "An internet browser"],
-                correct: 0
-            },
-            {
-                question: "What does the expression 'NPC' mean?",
-                answers: ["Normal person", "Unoriginal person", "New post", "Nice comment"],
-                correct: 1
-            },
-            {
-                question: "What is a 'Glow Up'?",
-                answers: ["Makeup trend", "Positive transformation", "Light effect", "Energy boost"],
-                correct: 1
-            },
-            {
-                question: "What does 'No cap' mean?",
-                answers: ["No hat", "No joke/for real", "No limit", "No cap"],
-                correct: 1
-            },
-            {
-                question: "What does it mean when something is 'sus'?",
-                answers: ["Is sweet", "Is suspicious", "Is sour", "Is super"],
-                correct: 1
-            },
-            {
-                question: "What is 'Brainrot'?",
-                answers: ["Brain disease", "Mindless content", "New video game", "Intensive studying"],
-                correct: 1
-            },
-            {
-                question: "When something is cringe, what does that mean?",
-                answers: ["Very funny", "Embarrassing, uncomfortable", "Very informative", "Very relaxing"],
-                correct: 1
-            }
-        ];
 
         let currentQuestion = 0;
         let score = 0;
@@ -108,12 +79,20 @@
         }
 
         function showQuestion() {
-            const question = questions[currentQuestion];
+            if (!window.questions || !window.questions.length) {
+                console.warn("Questions not loaded yet.");
+                return;
+            }
+            if (currentQuestion >= window.questions.length) {
+                console.log("Questions done.");
+            }
+
+            const question = window.questions[currentQuestion];
             document.getElementById('question').textContent = question.question;
-            
+
             const answersContainer = document.getElementById('answers');
             answersContainer.innerHTML = '';
-            
+
             question.answers.forEach((answer, index) => {
                 const button = document.createElement('button');
                 button.className = 'answer';
@@ -121,7 +100,7 @@
                 button.onclick = () => selectAnswer(index);
                 answersContainer.appendChild(button);
             });
-            
+
             updateProgress();
         }
 

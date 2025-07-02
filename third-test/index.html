@@ -41,6 +41,30 @@
         <p>&copy; 2025 ninoio. All rights reserved.</p>
     </footer>
 
+    <script type="module">
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+        import { getFirestore, collection, getDocs } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-firestore.js";
+
+        const firebaseConfig = {
+            apiKey: "AIzaSyDXX34b3o48hXWiQHjsvWuGgJzRIcLEzPg",
+            authDomain: "home-api-v1.firebaseapp.com",
+            projectId: "home-api-v1",
+            storageBucket: "home-api-v1.firebasestorage.app",
+            messagingSenderId: "621423913317",
+            appId: "1:621423913317:web:2b08cb2ad083fccb7b598c",
+            measurementId: "G-W3K4P1996N"
+        };
+
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+
+        const snapshot = await getDocs(collection(db, "questions_test3"));
+        const questions = snapshot.docs.map(doc => doc.data());
+
+        window.questions = questions;
+        window.questionsLoaded = true;
+    </script>
+
     <script>
         function hasTaskCookie() {
             return document.cookie.includes('taskCompletedTest2=true');
@@ -49,109 +73,6 @@
         if (!hasTaskCookie()) {
             window.location.href = '../first-test';
         }
-
-        const questions = [
-            {
-                question: "Which is the longest river in the world?",
-                answers: ["Amazon", "Nile", "Mississippi", "Yangtze"],
-                correct: 1
-            },
-            {
-                question: "In which year did the Berlin Wall fall?",
-                answers: ["1987", "1989", "1991", "1993"],
-                correct: 1
-            },
-            {
-                question: "Which element has the chemical symbol 'Au'?",
-                answers: ["Silver", "Aluminum", "Gold", "Argon"],
-                correct: 2
-            },
-            {
-                question: "How many continents are there?",
-                answers: ["5", "6", "7", "8"],
-                correct: 2
-            },
-            {
-                question: "Who painted the Mona Lisa?",
-                answers: ["Michelangelo", "Leonardo da Vinci", "Raphael", "Donatello"],
-                correct: 1
-            },
-            {
-                question: "Which is the largest mammal in the world?",
-                answers: ["Elephant", "Blue whale", "Giraffe", "Rhinoceros"],
-                correct: 1
-            },
-            {
-                question: "In which country is Machu Picchu located?",
-                answers: ["Bolivia", "Ecuador", "Peru", "Chile"],
-                correct: 2
-            },
-            {
-                question: "How many hearts does an octopus have?",
-                answers: ["1", "2", "3", "4"],
-                correct: 2
-            },
-            {
-                question: "Which is the smallest planet in our solar system?",
-                answers: ["Mars", "Venus", "Mercury", "Pluto"],
-                correct: 2
-            },
-            {
-                question: "Who wrote 'Romeo and Juliet'?",
-                answers: ["Charles Dickens", "William Shakespeare", "Jane Austen", "Mark Twain"],
-                correct: 1
-            },
-            {
-                question: "Which gas makes up the largest portion of Earth's atmosphere?",
-                answers: ["Oxygen", "Carbon dioxide", "Nitrogen", "Hydrogen"],
-                correct: 2
-            },
-            {
-                question: "In which year was the Titanic built?",
-                answers: ["1909", "1911", "1912", "1910"],
-                correct: 1
-            },
-            {
-                question: "What is the capital of Australia?",
-                answers: ["Sydney", "Melbourne", "Canberra", "Perth"],
-                correct: 2
-            },
-            {
-                question: "How many teeth does an adult human normally have?",
-                answers: ["28", "30", "32", "34"],
-                correct: 2
-            },
-            {
-                question: "Which animal is the symbol of WWF?",
-                answers: ["Tiger", "Panda", "Elephant", "Polar bear"],
-                correct: 1
-            },
-            {
-                question: "In which year did Neil Armstrong land on the moon?",
-                answers: ["1967", "1968", "1969", "1970"],
-                correct: 2
-            },
-            {
-                question: "Which is the hardest natural material?",
-                answers: ["Quartz", "Diamond", "Sapphire", "Ruby"],
-                correct: 1
-            },
-            {
-                question: "How many sides does an octagon have?",
-                answers: ["6", "7", "8", "9"],
-                correct: 2
-            },
-            {
-                question: "Which country has the most time zones?",
-                answers: ["USA", "Russia", "China", "Canada"],
-                correct: 1
-            },
-            {
-                question: "Who composed 'The Four Seasons'?",
-                answers: ["Mozart", "Bach", "Vivaldi", "Beethoven"],
-                correct: 2
-            }
-        ];
 
         let currentQuestion = 0;
         let score = 0;
@@ -165,8 +86,16 @@
             showQuestion();
         }
 
-        function showQuestion() {
-            const question = questions[currentQuestion];
+        function showQuestion() {            
+            if (!window.questions || !window.questions.length) {
+                console.warn("Questions not loaded yet.");
+                return;
+            }
+            if (currentQuestion >= window.questions.length) {
+                console.log("Questions done.");
+            }
+
+            const question = window.questions[currentQuestion];
             document.getElementById('questionNumber').textContent = `Question ${currentQuestion + 1} of ${questions.length}`;
             document.getElementById('questionText').textContent = question.question;
             
