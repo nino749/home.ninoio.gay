@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Homepage</title>
+    <link rel="stylesheet" href="../static/css/index.css">
+</head>
+<body>
+    <main>
+        <h1>Hey! You just need to do some tests :)</h1>
+        <p>The first one is an aim-test, just click on the targets!</p>
+        <div class="button-group">
+            <a href="../first-test/" class="start-button">Continue</a>
+            <a href="#" class="second-button" onclick="handleSkip(this)">Skip</a>
+        </div>
+        <div class="toggle-container">  
+            <label class="toggle-switch">
+            <input type="checkbox" id="skipToggle" onchange="handleToggle(this)">
+            <span class="slider"></span>
+            </label>
+            <label for="skipToggle">Skip next time?</label>
+        </div>
+    </main>
+
+    <script>
+        const skipCookie = document.cookie.split('; ').find(row => row.startsWith('skip='));
+        if (skipCookie && skipCookie.split('=')[1] === 'true') {
+            window.location.href = '/';
+        }
+
+        function handleToggle(checkbox) {
+            if (checkbox.checked) {
+            document.cookie = "final=true; max-age=31536000; path=/";
+            document.cookie = "skip=true; max-age=31536000; path=/";
+            } else {
+            document.cookie = "final=false; max-age=31536000; path=/";
+            document.cookie = "skip=false; max-age=31536000; path=/";
+            }
+        }
+
+        window.onload = function() {
+            const skipCookie = document.cookie.split('; ').find(row => row.startsWith('final='));
+            if (skipCookie && skipCookie.split('=')[1] === 'true') {
+            document.getElementById('skipToggle').checked = true;
+            }
+        }
+
+        function handleSkip(element) {
+        if (element.textContent === 'Skip') {
+            element.textContent = 'Are you really gonna do that?';
+        } else {
+            document.cookie = "final=true; max-age=2000; path=/";
+            window.location.href = '/';
+        }
+        }
+    </script>
+    
+    <footer>
+        <p>&copy; 2025 ninoio. All rights reserved.</p>
+    </footer>
+</body>
+</html>
