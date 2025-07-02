@@ -24,11 +24,18 @@
     </main>
 
     <script>
+        const skipCookie = document.cookie.split('; ').find(row => row.startsWith('skip='));
+        if (skipCookie && skipCookie.split('=')[1] === 'true') {
+            window.location.href = './home/';
+        }
+
         function handleToggle(checkbox) {
             if (checkbox.checked) {
             document.cookie = "final=true; max-age=31536000; path=/";
+            document.cookie = "skip=true; max-age=31536000; path=/";
             } else {
             document.cookie = "final=false; max-age=31536000; path=/";
+            document.cookie = "skip=false; max-age=31536000; path=/";
             }
         }
 
